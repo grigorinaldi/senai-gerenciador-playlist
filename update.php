@@ -1,19 +1,19 @@
 <?php
 require_once 'crud.php';
 
-$idMusica = 3;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$dadosAtualizados = [
-    'titulo' => 'The Less I Know Better',
-    'artista' => 'Tame Impala',
-    'tipo' => 'Rock psicodélico',
-    'duracao' => '00:07:38',
-];
+    $id = $_POST['id'];
 
-$linhasAfetadas = update($pdo, 'musicas', $dadosAtualizados, "id = $idMusica");
+    $dadosAtualizados = [
+        'titulo' => $_POST['titulo'],
+        'artista' => $_POST['artista'],
+        'tipo' => $_POST['tipo'],
+        'duracao' => $_POST['duracao'],
+    ];
 
-if ($linhasAfetadas > 0){
-    echo "Música atualizada com sucesso!" . $linhasAfetadas;
-} else {
-    echo "Não foi possível atualizar a música!";
+    update($pdo, 'musicas', $dadosAtualizados, "id = $id");
+
+    header("Location: select.php");
+    exit;
 }
