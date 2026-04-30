@@ -2,12 +2,11 @@
 
 require_once 'crud.php';
 
-$idMusica = 30;
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-$deleted = delete($pdo, 'musicas', 'id = '.$idMusica);
-
-if ($deleted) {
-    echo 'Música excluida com sucesso';
-}else {
-    echo 'Não foi possível excluir a música';
+    delete($pdo, 'musicas', "id = $id");
 }
+
+header("Location: select.php");
+exit;

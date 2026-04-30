@@ -23,6 +23,7 @@ foreach($musicas as $musica) {
 
     echo "<td>
         <a href='edit.php?id=" . $musica['id'] . "'>Editar</a>
+        <a href='delete.php?id=" . $musica['id'] . "'>Excluir</a>
     </td>";
 
     echo "</tr>";
