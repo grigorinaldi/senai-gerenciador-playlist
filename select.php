@@ -2,10 +2,24 @@
 require_once 'crud.php';
 
 $musicas = readAll($pdo, 'musicas');
+?>
 
-echo "<a href='create.php'>Adicionar Nova Música</a><br><br>";
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Playlist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-print '<table border=1>
+<h1>Minha Playlist</h1>
+
+<a class="btn" href="create.php">+ Nova Música</a>
+
+<br><br>
+
+<table>
     <tr>
         <th>ID</th>
         <th>Título</th>
@@ -13,22 +27,23 @@ print '<table border=1>
         <th>Tipo</th>
         <th>Tempo</th>
         <th>Ações</th>
-    </tr>';
+    </tr>
 
-foreach($musicas as $musica) {
-    echo "<tr>";
-    echo "<td>" . $musica['id'] . "</td>";
-    echo "<td>" . $musica['titulo'] . "</td>";
-    echo "<td>" . $musica['artista'] . "</td>";
-    echo "<td>" . $musica['tipo'] . "</td>";
-    echo "<td>" . $musica['duracao'] . "</td>";
+    <?php foreach($musicas as $musica): ?>
+    <tr>
+        <td><?= $musica['id'] ?></td>
+        <td><?= $musica['titulo'] ?></td>
+        <td><?= $musica['artista'] ?></td>
+        <td><?= $musica['tipo'] ?></td>
+        <td><?= $musica['duracao'] ?></td>
+        <td>
+            <a href="edit.php?id=<?= $musica['id'] ?>">Editar</a>
+            <a href="delete.php?id=<?= $musica['id'] ?>">Excluir</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
 
-    echo "<td>
-        <a href='edit.php?id=" . $musica['id'] . "'>Editar</a>
-        <a href='delete.php?id=" . $musica['id'] . "'>Excluir</a>
-    </td>";
+</table>
 
-    echo "</tr>";
-}
-
-print '</table>';
+</body>
+</html>
