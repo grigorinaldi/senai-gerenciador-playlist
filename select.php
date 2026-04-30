@@ -3,6 +3,8 @@ require_once 'crud.php';
 
 $musicas = readAll($pdo, 'musicas');
 
+echo "<a href='create.php'>Adicionar Nova Música</a><br><br>";
+
 print '<table border=1>
     <tr>
         <th>ID</th>
