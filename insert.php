@@ -2,12 +2,16 @@
 
 require_once 'crud.php';
 
-$novaMusica = [
-    'titulo' => 'Don´t Stop Me Now',
-    'artista' => 'Queen',
-    'tipo' => 'Rock',
-    'duracao' => '00:03:29',
-];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $novaMusica = [
+        'titulo' => $_POST['titulo'],
+        'artista' => $_POST['artista'],
+        'tipo' => $_POST['tipo'],
+        'duracao' => $_POST['duracao'],
+    ];
 
-$idMusicaNova = create($pdo, 'musicas', $novaMusica);
-echo 'novo livro inserido com ID: '.$idMusicaNova;
+    create($pdo, 'musicas', $novaMusica);
+
+    header("Location: select.php");
+    exit;
+}
